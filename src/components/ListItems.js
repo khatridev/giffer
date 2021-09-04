@@ -10,13 +10,13 @@ const ListItems = (props) => {
     const _renderItem = ({ item }) => {
         return <Image style={styles.imageCard}
             key={item.id}
-            source={{ uri: item.images?.original?.url }}
+            source={{ uri: item.images?.fixed_height_small_still?.url }}
             style={
                 styles.Image,
                 {
-                    width: 500,
-                    height: 500,
-                  }
+                    width: 200,
+                    height: 200,
+                }
             }
             resizeMode="cover"
         />
@@ -28,6 +28,7 @@ const ListItems = (props) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <Text style={styles.listLabel}>{props.currentSet}</Text>
             <FlatList
                 data={props.images}
                 renderItem={_renderItem}
@@ -40,7 +41,7 @@ const ListItems = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 100
+        marginTop: 70
     },
     item: {
         backgroundColor: '#f9c2ff',
@@ -54,6 +55,12 @@ const styles = StyleSheet.create({
     },
     imageCard: {
         position: "relative"
+    },
+    listLabel: {
+        fontSize:28,
+        opacity:0.5,
+        color: "grey",
+        alignItems: "flex-start"
     }
 
 });
