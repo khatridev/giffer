@@ -1,13 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View, TextInput, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ListItems from './src/components/ListItems';
 import SearchBar from './src/components/SearchBar';
-import api from './src/utils/ApiBase';
+import { getTrendingStickers, queryStickers } from './src/services/Giphy';
+import { colors } from './src/theme/colors';
+import * as GLOBAL from './src/utils/Consts';
 
 class App extends React.Component {
 
-  state = { images: [], currentSet: "What's trending" };
+  state = {
+    images: [],
+    currentSet: "Trending now",
+    searchTerm: ""
+  };
 
   componentDidMount() {
     this.onPageLoad();
@@ -15,36 +20,33 @@ class App extends React.Component {
 
   // on search handler
   onPageLoad = async () => {
-    console.log("onSearchSubmit called")
-    const res = await api.get("/stickers/trending", {
-      params: {
-        limit: 10,
-        api_key: "PTo8OaVWQlYP78CMUQtajXkPZ9eNEVxH"
-      }
+    images = await getTrendingStickers(GLOBAL.API_RESPONSE_LIMIT, 0);
+    this.setState({
+      images: res.data.data,
+      currentSet: "Trending now"
     });
-    this.setState({ images: res.data.data, currentSet: "What's trending now" });
-    console.log("onSearchSubmit res", res.data.data);
   };
 
   // on search handler
   onSearchSubmit = async (term) => {
-    console.log("onSearchSubmit called")
-    const res = await api.get("/stickers/search", {
-      params: {
-        q:term,
-        limit: 50,
-        api_key: "PTo8OaVWQlYP78CMUQtajXkPZ9eNEVxH"
-      }
+    images = await queryStickers(term, GLOBAL.API_RESPONSE_LIMIT, 0);
+    this.setState({
+      images: res.data.data,
+      currentSet: `Showing about ${res.data.pagination.total_count} results`,
+      searchTerm: term
     });
-    this.setState({ images: res.data.data, currentSet: `${res.data.pagination.total_count} results` });
-    console.log("onSearchSubmit res", res.data.data);
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <SearchBar onSubmit={this.onSearchSubmit} />
-        <ListItems images={this.state.images} currentSet={this.state.currentSet} />
+        <SearchBar
+          onSubmit={this.onSearchSubmit} />
+        <ListItems
+          images={this.state.images}
+          currentSet={this.state.currentSet}
+          searchTerm={this.state.searchTerm}
+        />
       </View>
     );
   }
@@ -52,8 +54,7 @@ class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20
+    flex: 1
   }
 });
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
+import { colors } from '../theme/colors';
 
 class SearchBar extends React.Component {
     state = { term: "" };
@@ -15,7 +16,7 @@ class SearchBar extends React.Component {
             <View style={styles.container} >
                 <TextInput
                     style={styles.input}
-                    placeholder="search gifs"
+                    placeholder="What's on your mind"
                     onSubmitEditing={this.onTextSubmit}
                     value={this.state.term}
                     onChangeText={(text) => this.setState({ term: text})}
@@ -32,14 +33,21 @@ const styles = StyleSheet.create({
         top: 0,
         position: "absolute",
         width: "100%",
-        marginTop: 20
+        marginTop: 20,
+        display:"flex",
+        marginHorizontal:20
 
     },
     input: {
         height: 40,
-        margin: 12,
         borderWidth: 1,
         padding: 10,
+        fontSize:20,
+        width:"100%",
+        color:colors.blue_seadark,
+        backgroundColor:colors.white,
+        marginHorizontal:10,
+        opacity:0.7
     },
 });
 
