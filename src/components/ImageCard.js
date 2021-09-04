@@ -5,12 +5,11 @@ import {colors} from '../theme/colors';
 export class ImageCard extends Component {
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <Image style={styles.imageCard}
                     key={this.props.item.id}
                     source={{ uri: this.props.item.images?.fixed_width_small_still?.url }}
                     style={
-                        styles.Image,
                         {
                             borderColor: colors.veryLightPink,
                             borderRadius: 5,

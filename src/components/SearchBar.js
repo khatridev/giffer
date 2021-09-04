@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput, Image } from 'react-native';
 import { colors } from '../theme/colors';
 
 class SearchBar extends React.Component {
@@ -8,18 +8,21 @@ class SearchBar extends React.Component {
     onTextSubmit = (e) => {
         e.preventDefault();
         this.props.onSubmit(this.state.term);
-        console.log("onTextSubmit",this.props,this.state.term);
+        console.log("onTextSubmit", this.props, this.state.term);
     };
 
     render() {
         return (
             <View style={styles.container} >
+                <Image
+                    source={require('../assets/images/search.png')} //Change your icon image here
+                    style={styles.imageStyle}
+                />
                 <TextInput
-                    style={styles.input}
                     placeholder="What's on your mind"
                     onSubmitEditing={this.onTextSubmit}
                     value={this.state.term}
-                    onChangeText={(text) => this.setState({ term: text})}
+                    onChangeText={(text) => this.setState({ term: text })}
                 />
             </View>
         );
@@ -30,25 +33,25 @@ class SearchBar extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        top: 0,
-        position: "absolute",
-        width: "100%",
-        marginTop: 20,
-        display:"flex",
-        marginHorizontal:20
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderWidth: 0.5,
+        borderColor: '#000',
+        height: 40,
+        borderRadius: 5,
+        margin: 10,
 
     },
-    input: {
-        height: 40,
-        borderWidth: 1,
+    imageStyle: {
         padding: 10,
-        fontSize:20,
-        width:"100%",
-        color:colors.blue_seadark,
-        backgroundColor:colors.white,
-        marginHorizontal:10,
-        opacity:0.7
-    },
+        margin: 5,
+        height: 25,
+        width: 25,
+        resizeMode: 'stretch',
+        alignItems: 'center',
+    }
 });
 
 export default SearchBar;

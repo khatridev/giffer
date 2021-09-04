@@ -12,6 +12,7 @@ class ListItems extends React.Component {
     // const {width, height} = Dimensions.get('window');
     // setColumnNo(Math.ceil(width/100));
 
+    numColumns = 2;
     state = {
         offset: 0,
         data: []
@@ -83,7 +84,6 @@ class ListItems extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 70,
         display: "flex",
         flexDirection: "column",
         alignItems: "center"
