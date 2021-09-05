@@ -8,14 +8,13 @@ class SearchBar extends React.Component {
     onTextSubmit = (e) => {
         e.preventDefault();
         this.props.onSubmit(this.state.term);
-        console.log("onTextSubmit", this.props, this.state.term);
     };
 
     render() {
         return (
             <View style={styles.container} >
                 <Image
-                    source={require('../assets/images/search.png')} //Change your icon image here
+                    source={require('../assets/images/search.png')} 
                     style={styles.imageStyle}
                 />
                 <TextInput

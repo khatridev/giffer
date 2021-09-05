@@ -32,22 +32,15 @@ class ListItems extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.searchTerm != this.props.searchTerm) {
-            console.log("componentDidUpdate NE");
             this.setState({ offset: 0, data: this.props.images });
         }
-        const { width, height } = Dimensions.get('window');
     }
 
     _renderItem = ({ item }) => {
-        console.log("_renderItem", item ? "yes" : "No");
         return <ImageCard item={item} />
     }
-
-    check = () => {
-        console.log("check", this.props.images);
-    }
+    
     _fetchResults = async () => {
-        console.log("_fetchREsult", this.props.searchTerm, GLOBAL.API_RESPONSE_LIMIT, this.state.offset);
         const { data, offset } = this.state;
         this.setState({ data: data, offset: GLOBAL.API_RESPONSE_LIMIT + offset + 1 });
 

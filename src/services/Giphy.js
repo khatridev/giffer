@@ -2,7 +2,6 @@ import api from "../utils/ApiBase";
 const API_KEY = "PTo8OaVWQlYP78CMUQtajXkPZ9eNEVxH"; // TODO: add a secure place 
 
 export async function getTrendingStickers(limit,offset){
-    console.log("getTrendingStickers",limit,offset);
     return res = await api.get("/stickers/trending", {
         params: {
             limit: limit,
