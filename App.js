@@ -8,28 +8,20 @@ import * as GLOBAL from './src/utils/Consts';
 
 class App extends React.Component {
 
-  state = {
-    images: [],
-    currentSet: "Trending now",
-    searchTerm: ""
-  };
+ 
 
-  componentDidMount() {
-    this.onPageLoad();
-  }
-
-  // on search handler
-  onPageLoad = async () => {
-    images = await getTrendingStickers(GLOBAL.API_RESPONSE_LIMIT, 0);
-    this.setState({
-      images: res.data.data,
-      currentSet: "Trending now"
-    });
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: [],
+      currentSet: "Trending now",
+      searchTerm: ""
+    };
+}
 
   // on search handler
   onSearchSubmit = async (term) => {
-    images = await queryStickers(term, GLOBAL.API_RESPONSE_LIMIT, 0);
+    res = await queryStickers(term, GLOBAL.API_RESPONSE_LIMIT, 0);
     this.setState({
       images: res.data.data,
       currentSet: `Showing about ${res.data.pagination.total_count} results`,

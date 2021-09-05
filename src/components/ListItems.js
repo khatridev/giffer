@@ -9,29 +9,39 @@ import * as GLOBAL from '../utils/Consts';
 
 // main component
 class ListItems extends React.Component {
-    // const {width, height} = Dimensions.get('window');
-    // setColumnNo(Math.ceil(width/100));
-
-    numColumns = 2;
-    state = {
-        offset: 0,
-        data: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            offset: 0,
+            data: this.props.images,
+            numColumns:0
+        }
     }
+
 
     componentDidMount() {
-        console.log("componentDidMount");
-        this.setState({ offset: 0, data: this.props.images });
+        this.onPageLoad();
     }
 
+    onPageLoad = async () => {
+        res = await getTrendingStickers(GLOBAL.API_RESPONSE_LIMIT, 0);
+        this.setState({
+            offset: 0,
+            data: res.data.data
+        });
+    };
+
     componentDidUpdate(prevProps) {
-        console.log("componentDidUpdate", prevProps.searchTerm, this.props.searchTerm);
+        // console.log("componentDidUpdate props", prevProps.images.length, this.props.images);
         if (prevProps.searchTerm != this.props.searchTerm) {
             console.log("componentDidUpdate NE");
             this.setState({ offset: 0, data: this.props.images });
         }
+        const {width, height} = Dimensions.get('window');
     }
 
     _renderItem = ({ item }) => {
+        console.log("_renderItem", item ? "yes" : "No");
         return <ImageCard item={item} />
     }
 
@@ -44,22 +54,22 @@ class ListItems extends React.Component {
         this.setState({ data: data, offset: GLOBAL.API_RESPONSE_LIMIT + offset + 1 });
 
         if (this.props.searchTerm !== "") {
-            queryStickers(this.props.searchTerm, GLOBAL.API_RESPONSE_LIMIT, GLOBAL.API_RESPONSE_LIMIT + this.state.offset).then((res)=>{
+            queryStickers(this.props.searchTerm, GLOBAL.API_RESPONSE_LIMIT, GLOBAL.API_RESPONSE_LIMIT + this.state.offset).then((res) => {
                 this.setState({
                     data: data.concat(res.data.data),
-                    offset:this.state.offset
+                    offset: this.state.offset
                 });
             });
         } else {
             getTrendingStickers(GLOBAL.API_RESPONSE_LIMIT, GLOBAL.API_RESPONSE_LIMIT + this.state.offset).then((res) => {
                 this.setState({
                     data: data.concat(res.data.data),
-                    offset:this.state.offset
+                    offset: this.state.offset
                 });
             });
         }
 
-        
+
     }
 
     render() {
@@ -86,7 +96,8 @@ const styles = StyleSheet.create({
     container: {
         display: "flex",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
+        flex: 1
     },
     labelContainer: {
         backgroundColor: colors.blue_seadark,
@@ -94,7 +105,9 @@ const styles = StyleSheet.create({
 
     },
     flatList: {
-        marginTop: 10
+        marginTop: 10,
+        width: '100%',
+        height: '100%'
     },
     listLabel: {
         fontSize: 16,

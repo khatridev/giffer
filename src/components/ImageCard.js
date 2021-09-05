@@ -14,8 +14,8 @@ export class ImageCard extends Component {
                             borderColor: colors.veryLightPink,
                             borderRadius: 5,
                             borderWidth: 1,
-                            width: 300,
-                            height: 300,
+                            width: 200,
+                            height: 200,
                             margin: 10,
                             backgroundColor: colors.pink_light
                         }
@@ -28,6 +28,9 @@ export class ImageCard extends Component {
 }
 
 const styles = StyleSheet.create({
+    container:{
+        display:"flex"
+    },
     imageCard: {
         justifyContent: "center",
         alignContent: "center",
