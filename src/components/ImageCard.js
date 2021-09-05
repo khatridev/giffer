@@ -11,12 +11,12 @@ export class ImageCard extends Component {
                     source={{ uri: this.props.item.images?.fixed_width_small_still?.url }}
                     style={
                         {
-                            borderColor: colors.veryLightPink,
+                            borderColor: colors.pink_light,
                             borderRadius: 5,
                             borderWidth: 1,
-                            width: 200,
+                            width: '100%',
                             height: 200,
-                            margin: 10,
+                            margin: 5,
                             backgroundColor: colors.pink_light
                         }
                     }
@@ -29,12 +29,15 @@ export class ImageCard extends Component {
 
 const styles = StyleSheet.create({
     container:{
-        display:"flex"
+        display:"flex",
+        flexDirection:"column",
+        paddingHorizontal:20
+        
+
     },
     imageCard: {
-        justifyContent: "center",
-        alignContent: "center",
-        position: "relative"
+        display:"flex",
+        flexDirection:"column"
     }
 });
 

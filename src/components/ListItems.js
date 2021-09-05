@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, Image, useWindowDimensions, Dimensions } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, Dimensions } from 'react-native';
 import ImageCard from './ImageCard';
 import { colors } from '../theme/colors';
 import { getTrendingStickers, queryStickers } from '../services/Giphy';
@@ -7,14 +7,13 @@ import * as GLOBAL from '../utils/Consts';
 
 
 
-// main component
+// main list component
 class ListItems extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             offset: 0,
-            data: this.props.images,
-            numColumns:0
+            data: this.props.images
         }
     }
 
@@ -32,12 +31,11 @@ class ListItems extends React.Component {
     };
 
     componentDidUpdate(prevProps) {
-        // console.log("componentDidUpdate props", prevProps.images.length, this.props.images);
         if (prevProps.searchTerm != this.props.searchTerm) {
             console.log("componentDidUpdate NE");
             this.setState({ offset: 0, data: this.props.images });
         }
-        const {width, height} = Dimensions.get('window');
+        const { width, height } = Dimensions.get('window');
     }
 
     _renderItem = ({ item }) => {

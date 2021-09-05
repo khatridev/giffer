@@ -1,4 +1,5 @@
 import api from "../utils/ApiBase";
+const API_KEY = "PTo8OaVWQlYP78CMUQtajXkPZ9eNEVxH"; // TODO: add a secure place 
 
 export async function getTrendingStickers(limit,offset){
     console.log("getTrendingStickers",limit,offset);
@@ -6,7 +7,7 @@ export async function getTrendingStickers(limit,offset){
         params: {
             limit: limit,
             offset: offset,
-            api_key: "PTo8OaVWQlYP78CMUQtajXkPZ9eNEVxH"
+            api_key: API_KEY 
         }
     });
 }
@@ -16,7 +17,7 @@ export async function queryStickers(term,limit,offset){
         q:term,
         limit: limit,
         offset:offset,
-        api_key: "PTo8OaVWQlYP78CMUQtajXkPZ9eNEVxH"
+        api_key:  API_KEY 
       }
     });
 }

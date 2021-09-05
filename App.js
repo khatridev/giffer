@@ -8,8 +8,6 @@ import * as GLOBAL from './src/utils/Consts';
 
 class App extends React.Component {
 
- 
-
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +15,7 @@ class App extends React.Component {
       currentSet: "Trending now",
       searchTerm: ""
     };
-}
+  }
 
   // on search handler
   onSearchSubmit = async (term) => {
