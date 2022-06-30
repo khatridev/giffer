@@ -7,7 +7,7 @@ import * as GLOBAL from '../utils/Consts';
 
 
 
-// main list component
+// Main list component
 class ListItems extends React.Component {
     constructor(props) {
         super(props);
